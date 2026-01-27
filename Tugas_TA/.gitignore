@@ -19,6 +19,15 @@
 /storage/*.key
 /storage/pail
 /vendor
+/test_db.php
+/routes.txt
+/debug_paths.php
+.phpunit.result.cache
 Homestead.json
 Homestead.yaml
+npm-debug.log
+yarn-error.log
+.idea/
+.vscode/
+.DS_Store
 Thumbs.db
