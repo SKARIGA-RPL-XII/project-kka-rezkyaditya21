@@ -12,7 +12,7 @@ class ClassController extends Controller
 {
     public function index()
     {
-        $classrooms = Auth::user()->classrooms;
+        $classrooms = Auth::user()->classrooms()->with('students')->get();
         return view('guru.kelas.index', compact('classrooms'));
     }
 
@@ -34,9 +34,9 @@ class ClassController extends Controller
         return redirect()->route('guru.kelas.index')->with('success', 'Kelas berhasil dibuat.');
     }
 
-    public function show(Classroom $kela) // Use $kela because of Laravel's pluralization for route-model binding (kelas -> kela?)
+    public function show(Classroom $kela)
     {
-        // Let's actually use a custom identifier if pluralization is weird
+        $kela->load(['students', 'materials', 'assignments']);
         return view('guru.kelas.show', compact('kela'));
     }
 
