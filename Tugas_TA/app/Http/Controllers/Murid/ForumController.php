@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Guru;
+namespace App\Http\Controllers\Murid;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\ForumTopic;
 use App\Models\ForumReply;
 use App\Models\Classroom;
@@ -19,13 +18,13 @@ class ForumController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('guru.forum.index', compact('topics'));
+        return view('murid.forum.index', compact('topics'));
     }
 
     public function create()
     {
-        $classrooms = Classroom::all();
-        return view('guru.forum.create', compact('classrooms'));
+        $classrooms = Auth::user()->enrolledClassrooms;
+        return view('murid.forum.create', compact('classrooms'));
     }
 
     public function store(Request $request)
@@ -43,13 +42,13 @@ class ForumController extends Controller
             'classroom_id' => $request->classroom_id,
         ]);
 
-        return redirect()->route('guru.forum.index')->with('success', 'Topik diskusi berhasil dibuat!');
+        return redirect()->route('murid.forum.index')->with('success', 'Topik diskusi berhasil dibuat!');
     }
 
     public function show($id)
     {
         $topic = ForumTopic::with(['user', 'classroom', 'replies.user'])->findOrFail($id);
-        return view('guru.forum.show', compact('topic'));
+        return view('murid.forum.show', compact('topic'));
     }
 
     public function storeReply(Request $request, $id)
@@ -65,13 +64,5 @@ class ForumController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Komentar berhasil ditambahkan!');
-    }
-
-    public function destroy($id)
-    {
-        $topic = ForumTopic::where('user_id', Auth::id())->findOrFail($id);
-        $topic->delete();
-
-        return redirect()->route('guru.forum.index')->with('success', 'Topik diskusi berhasil dihapus!');
     }
 }

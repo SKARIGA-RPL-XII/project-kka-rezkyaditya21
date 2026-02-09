@@ -28,6 +28,8 @@ class AuthController extends Controller
 
             if (Auth::user()->role === 'guru') {
                 return redirect()->intended(route('guru.dashboard'));
+            } elseif (Auth::user()->role === 'murid') {
+                return redirect()->intended(route('murid.dashboard'));
             }
             return redirect()->intended(route('home'));
         }
@@ -62,6 +64,8 @@ class AuthController extends Controller
 
         if ($user->role === 'guru') {
             return redirect()->route('guru.dashboard');
+        } elseif ($user->role === 'murid') {
+            return redirect()->route('murid.dashboard');
         }
         return redirect()->route('home');
     }

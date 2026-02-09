@@ -34,6 +34,7 @@ class AssignmentController extends Controller
             'description' => 'nullable|string',
             'file' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,zip,jpg,png|max:10240',
             'is_published' => 'boolean',
+            'due_date' => 'nullable|date',
         ]);
 
         $classroom = Classroom::findOrFail($validated['classroom_id']);
@@ -50,10 +51,20 @@ class AssignmentController extends Controller
         return redirect()->route('guru.tugas.index')->with('success', 'Tugas berhasil ditambahkan.');
     }
 
-    public function show(Assignment $tuga) // Pluralization again: tugas -> tuga?
+    public function show(Assignment $tuga)
     {
         $this->authorizeTeacher($tuga);
-        return view('guru.tugas.show', compact('tuga'));
+        
+        $assignment = $tuga;
+        $classroom = $assignment->classroom;
+        
+        // Get all students in the class
+        $students = $classroom->students; // Assuming 'students' relationship exists on Classroom model (belongsToMany User)
+        
+        // Get all submissions for this assignment keyed by student_id for easy lookup
+        $submissions = $assignment->submissions->keyBy('student_id');
+
+        return view('guru.tugas.show', compact('assignment', 'students', 'submissions'));
     }
 
     public function edit(Assignment $tuga)
@@ -72,6 +83,7 @@ class AssignmentController extends Controller
             'description' => 'nullable|string',
             'file' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,zip,jpg,png|max:10240',
             'is_published' => 'boolean',
+            'due_date' => 'nullable|date',
         ]);
 
         $classroom = Classroom::findOrFail($validated['classroom_id']);
@@ -100,6 +112,25 @@ class AssignmentController extends Controller
         $tuga->delete();
 
         return redirect()->route('guru.tugas.index')->with('success', 'Tugas berhasil dihapus.');
+    }
+
+    public function gradeSubmission(Request $request, $id)
+    {
+        $submission = \App\Models\AssignmentSubmission::findOrFail($id);
+        
+        // Authorize: Check if the assignment belongs to a class taught by the user
+        if ($submission->assignment->classroom->teacher_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'score' => 'required|integer|min:0|max:100',
+            'feedback' => 'nullable|string',
+        ]);
+
+        $submission->update($validated);
+
+        return redirect()->back()->with('success', 'Nilai berhasil disimpan.');
     }
 
     private function authorizeTeacher(Assignment $assignment)

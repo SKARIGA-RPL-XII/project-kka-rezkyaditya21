@@ -31,6 +31,12 @@
                 </div>
 
                 <div>
+                    <label for="due_date" class="block text-sm font-bold text-gray-700 mb-2">Tenggat Waktu (Deadline)</label>
+                    <input type="datetime-local" name="due_date" id="due_date" value="{{ old('due_date') }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                </div>
+
+                <div>
                     <label for="file" class="block text-sm font-bold text-gray-700 mb-2">Upload File Pendukung (Opsional)</label>
                     <div class="relative border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-indigo-400 transition cursor-pointer bg-gray-50 flex flex-col items-center">
                         <input type="file" name="file" id="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">

@@ -29,6 +29,12 @@
                 </div>
 
                 <div>
+                    <label for="due_date" class="block text-sm font-bold text-gray-700 mb-2">Tenggat Waktu (Deadline)</label>
+                    <input type="datetime-local" name="due_date" id="due_date" value="{{ old('due_date', $tuga->due_date ? $tuga->due_date->format('Y-m-d\TH:i') : '') }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                </div>
+
+                <div>
                     <label class="block text-sm font-bold text-gray-700 mb-2">File Saat Ini</label>
                     @if($tuga->file_path)
                         <div class="flex items-center p-3 bg-indigo-50 border border-indigo-100 rounded-lg mb-2">

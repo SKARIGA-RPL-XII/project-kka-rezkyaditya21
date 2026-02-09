@@ -1,4 +1,4 @@
-<x-layouts.guru>
+    <x-layouts.guru>
     <x-slot name="title">Kelola Murid</x-slot>
 
     <div class="flex justify-between items-center mb-6">
