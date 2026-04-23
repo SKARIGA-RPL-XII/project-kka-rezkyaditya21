@@ -7,6 +7,7 @@ use App\Http\Controllers\Murid\DashboardController as MuridDashboardController;
 use App\Http\Controllers\Murid\ClassController as MuridClassController;
 use App\Http\Controllers\Murid\MaterialController as MuridMaterialController;
 use App\Http\Controllers\Murid\ForumController as MuridForumController;
+use App\Http\Controllers\Murid\NoteController as MuridNoteController;
 
 use App\Http\Controllers\Auth\AuthController;
 
@@ -63,5 +64,8 @@ Route::middleware(['auth', 'role:murid'])->prefix('murid')->name('murid.')->grou
     Route::post('/forum', [MuridForumController::class, 'store'])->name('forum.store');
     Route::get('/forum/{id}', [MuridForumController::class, 'show'])->name('forum.show');
     Route::post('/forum/{id}/reply', [MuridForumController::class, 'storeReply'])->name('forum.reply');
+
+    // Notes Routes
+    Route::resource('notes', MuridNoteController::class)->except(['show']);
 });
 

@@ -56,5 +56,10 @@ class User extends Authenticatable implements \Filament\Models\Contracts\Filamen
     {
         return $this->belongsToMany(Material::class, 'material_user')->withTimestamps()->withPivot('completed_at');
     }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
 }
 
