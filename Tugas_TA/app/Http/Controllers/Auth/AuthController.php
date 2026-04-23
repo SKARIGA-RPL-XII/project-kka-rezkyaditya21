@@ -26,8 +26,8 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            if (Auth::user()->role === 'guru') {
-                return redirect()->intended(route('guru.dashboard'));
+            if (Auth::user()->role === 'admin') {
+                return redirect()->path('admin');
             } elseif (Auth::user()->role === 'murid') {
                 return redirect()->intended(route('murid.dashboard'));
             }
@@ -50,20 +50,19 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:guru,murid',
         ]);
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role' => $validated['role'],
+            'role' => 'murid',
         ]);
 
         Auth::login($user);
 
-        if ($user->role === 'guru') {
-            return redirect()->route('guru.dashboard');
+        if ($user->role === 'admin') {
+            return redirect()->path('admin');
         } elseif ($user->role === 'murid') {
             return redirect()->route('murid.dashboard');
         }

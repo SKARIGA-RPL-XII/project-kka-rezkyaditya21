@@ -27,7 +27,7 @@ class ForumTopicResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->with(['user', 'classroom']);
+        return parent::getEloquentQuery()->with(['user']);
     }
 
     public static function form(Form $form): Form
@@ -39,12 +39,6 @@ class ForumTopicResource extends Resource
                     ->required()
                     ->searchable()
                     ->label('Penulis'),
-                Forms\Components\Select::make('classroom_id')
-                    ->relationship('classroom', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->nullable()
-                    ->label('Kelas (Opsional)'),
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255)
@@ -67,10 +61,6 @@ class ForumTopicResource extends Resource
                     ->label('Penulis')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('classroom.name')
-                    ->label('Kelas')
-                    ->searchable()
-                    ->default('Umum'),
                 Tables\Columns\TextColumn::make('replies_count')
                     ->counts('replies')
                     ->label('Balasan'),

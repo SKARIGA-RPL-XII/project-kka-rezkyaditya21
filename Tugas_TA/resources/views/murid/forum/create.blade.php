@@ -19,17 +19,6 @@
                         <input type="text" name="title" required class="w-full rounded-xl border-slate-200 font-bold text-slate-800 placeholder:font-normal focus:border-indigo-500 focus:ring-indigo-500" placeholder="Apa yang ingin didiskusikan?">
                     </div>
 
-                     <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Pilih Kelas (Opsional)</label>
-                        <select name="classroom_id" class="w-full rounded-xl border-slate-200 text-slate-800 focus:border-indigo-500 focus:ring-indigo-500">
-                            <option value="">-- Diskusi Umum --</option>
-                            @foreach($classrooms as $class)
-                                <option value="{{ $class->id }}">{{ $class->name }}</option>
-                            @endforeach
-                        </select>
-                        <p class="text-[10px] text-slate-400 font-bold mt-2">Pilih kelas jika diskusi berkaitan dengan materi spesifik.</p>
-                    </div>
-
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Isi Diskusi</label>
                         <textarea name="content" rows="6" required class="w-full rounded-xl border-slate-200 text-slate-800 focus:border-indigo-500 focus:ring-indigo-500" placeholder="Jelaskan pertanyaan atau topik diskusi Anda..."></textarea>

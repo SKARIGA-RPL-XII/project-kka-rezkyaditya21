@@ -1,0 +1,14 @@
+
+> tugas_ta@1.0.0 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 54 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mpublic/build/[22m[32mmanifest.json               [39m[1m[2m 0.56 kB[22m[1m[22m[2m │ gzip:  0.21 kB[22m
+[2mpublic/build/[22m[35massets/app-1a-e6vxn.css     [39m[1m[2m72.64 kB[22m[1m[22m[2m │ gzip: 11.84 kB[22m
+[2mpublic/build/[22m[35massets/global-Dh0EcuNx.css  [39m[1m[2m79.37 kB[22m[1m[22m[2m │ gzip: 12.68 kB[22m
+[2mpublic/build/[22m[36massets/app-CAiCLEjY.js      [39m[1m[2m36.35 kB[22m[1m[22m[2m │ gzip: 14.71 kB[22m
+[32m✓ built in 2.12s[39m

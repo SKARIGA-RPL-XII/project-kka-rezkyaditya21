@@ -52,13 +52,9 @@ class User extends Authenticatable implements \Filament\Models\Contracts\Filamen
         return $this->role === 'admin' || $this->email === 'admin@edulearn.com';
     }
 
-    public function classrooms()
+    public function completedMaterials()
     {
-        return $this->hasMany(Classroom::class, 'teacher_id');
-    }
-
-    public function enrolledClassrooms()
-    {
-        return $this->belongsToMany(Classroom::class, 'classroom_user');
+        return $this->belongsToMany(Material::class, 'material_user')->withTimestamps()->withPivot('completed_at');
     }
 }
+

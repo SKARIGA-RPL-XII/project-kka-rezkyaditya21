@@ -15,7 +15,16 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (!$request->user() || $request->user()->role !== $role) {
+        if (!$request->user()) {
+            abort(403, 'Unauthorized.');
+        }
+
+        // Allow admin to bypass role checks
+        if ($request->user()->role === 'admin') {
+            return $next($request);
+        }
+
+        if ($request->user()->role !== $role) {
             abort(403, 'Unauthorized.');
         }
 

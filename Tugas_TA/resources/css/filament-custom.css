@@ -1,0 +1,66 @@
+/* Custom Styling to match Guru Design System */
+
+/* Sidebar */
+.fi-sidebar {
+    background-color: #0f172a !important; /* slate-900 */
+    border-right: 1px solid #1e293b !important; /* slate-800 */
+}
+
+.fi-sidebar-item-button {
+    border-radius: 0.75rem !important; /* rounded-xl */
+    margin-bottom: 0.5rem !important;
+}
+
+.fi-sidebar-item-button.fi-active {
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 100%) !important;
+    border-left: 4px solid #6366f1 !important;
+    color: #fff !important;
+}
+
+.fi-sidebar-nav {
+    scrollbar-width: none !important;
+}
+
+.fi-sidebar-nav::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* Navbar */
+.fi-topbar {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+    border-bottom: 1px solid #e2e8f0 !important; /* border-slate-200 */
+}
+
+/* Cards & Components */
+.fi-section, .fi-card {
+    border-radius: 2rem !important; /* rounded-[2rem] */
+    border: 1px solid #f1f5f9 !important; /* border-slate-100 */
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+}
+
+.fi-ta-header, .fi-ta-content {
+    border-radius: 2rem !important;
+}
+
+/* Buttons */
+.fi-btn {
+    border-radius: 0.75rem !important;
+    font-weight: 700 !important;
+    transition: all 0.2s !important;
+}
+
+.fi-btn:active {
+    transform: scale(0.95) !important;
+}
+
+/* Inputs */
+.fi-input-wrp {
+    border-radius: 0.75rem !important;
+}
+
+/* Logo */
+.fi-logo {
+    font-weight: 800 !important;
+    letter-spacing: -0.025em !important;
+}

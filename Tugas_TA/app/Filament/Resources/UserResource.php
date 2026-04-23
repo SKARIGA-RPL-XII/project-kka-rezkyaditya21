@@ -52,7 +52,6 @@ class UserResource extends Resource
                 Forms\Components\Select::make('role')
                     ->options([
                         'admin' => 'Admin',
-                        'guru' => 'Guru',
                         'murid' => 'Murid',
                     ])
                     ->required()
@@ -83,7 +82,6 @@ class UserResource extends Resource
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'admin' => 'danger',
-                        'guru' => 'success',
                         'murid' => 'info',
                         default => 'gray',
                     })
@@ -97,7 +95,6 @@ class UserResource extends Resource
                 Tables\Filters\SelectFilter::make('role')
                     ->options([
                         'admin' => 'Admin',
-                        'guru' => 'Guru',
                         'murid' => 'Murid',
                     ]),
             ])

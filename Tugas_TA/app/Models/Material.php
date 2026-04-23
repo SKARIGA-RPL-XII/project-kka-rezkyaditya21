@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Material extends Model
 {
-    protected $fillable = ['classroom_id', 'title', 'content', 'file_path', 'is_published'];
+    protected $fillable = ['title', 'content', 'file_path', 'video_url', 'is_published', 'language', 'sample_code', 'has_compiler', 'has_flowchart'];
 
-    public function classroom()
+
+    public function completedBy()
     {
-        return $this->belongsTo(Classroom::class);
+        return $this->belongsToMany(User::class, 'material_user')->withTimestamps()->withPivot('completed_at');
     }
 }
